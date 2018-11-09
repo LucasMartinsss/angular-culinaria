@@ -1,0 +1,19 @@
+.new {
+  padding: 30px;
+  .nav-item {
+    width: 33%;
+    text-align: center;
+    .nav-link {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  }
+  .btn-danger {
+    position: absolute;
+    bottom: 5px;
+  }
+  .lbl-qtd {
+    white-space: nowrap;
+  }
+}

@@ -22,7 +22,7 @@ const routes: Routes = [
         component: ViewRecipesComponent
       },
       {
-        path: "detail",
+        path: "detail/:id",
         component: DetailRecipeComponent
       },
       {

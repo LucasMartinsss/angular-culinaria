@@ -1,3 +1,209 @@
-<p>
-  new-recipe works!
-</p>
+<div class="row new">
+  <div class="col-12 text-center mb-3"><h1>Criar Receita</h1></div>
+  <div class="col-12">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a
+          class="nav-link active"
+          id="description-tab"
+          data-toggle="tab"
+          href="#description"
+          role="tab"
+          aria-controls="home"
+          aria-selected="true"
+          >Descrição</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          id="ingredients-tab"
+          data-toggle="tab"
+          href="#ingredients"
+          role="tab"
+          aria-controls="ingredients"
+          aria-selected="false"
+          >Ingredientes</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          id="preparation-tab"
+          data-toggle="tab"
+          href="#preparation"
+          role="tab"
+          aria-controls="preparation"
+          aria-selected="false"
+          >Modo de preparo</a
+        >
+      </li>
+    </ul>
+    <form>
+      <div class="tab-content" id="myTabContent">
+        <div
+          class="tab-pane fade show active"
+          id="description"
+          role="tabpanel"
+          aria-labelledby="description-tab"
+        >
+          <div class="row mt-2 px-2">
+            <div class="col-12">
+              <div class="form-group">
+                <label for="name">Nome:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  aria-describedby="name"
+                  placeholder="Nome da receita"
+                  name="name"
+                  [(ngModel)]="recipe.name"
+                />
+              </div>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label for="portions">Porções:</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="portions"
+                  placeholder="Porções"
+                  name="portions"
+                  [(ngModel)]="recipe.portions"
+                />
+              </div>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label for="calories">Calorias:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="calories"
+                  placeholder="Quantidade de calorias"
+                  name="calories"
+                  [(ngModel)]="recipe.calories"
+                />
+              </div>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label for="category">Categoria:</label>
+                <select
+                  name="category"
+                  [(ngModel)]="recipe.category"
+                  class="form-control"
+                  id="category"
+                >
+                  <option value="0">Prato Principal</option>
+                  <option value="1">Sobremesas</option>
+                  <option value="2">Entradas</option>
+                  <option value="3">Bebidas</option>
+                  <option value="4">Outros</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label for="details">Detalhes:</label>
+                <textarea
+                  name="details"
+                  [(ngModel)]="recipe.details"
+                  class="form-control"
+                  id="details"
+                  rows="3"
+                  placeholder="Detalhes (comentários / observações)"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="tab-pane fade"
+          id="ingredients"
+          role="tabpanel"
+          aria-labelledby="ingredients-tab"
+        >
+          <div class="row px-2 my-2">
+            <div class="col-6">
+              <button class="btn btn-primary" (click)="addIngredient()">
+                <i class="fa fa-plus"></i>
+              </button>
+            </div>
+          </div>
+          <div
+            class="row mb-2 px-2"
+            [@filterAnimation]="i"
+            *ngFor="let item of ingredientsModel; let i = index"
+          >
+            <div class="col-6">
+              <div class="form-group mb-1">
+                <label for="name-ingredient">Ingrediente {{ i + 1 }}:</label>
+                <input
+                  type="text"
+                  [(ngModel)]="ingredientsModel[i].name"
+                  class="form-control form-control-sm"
+                  name="name{{i}}"
+                />
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group mb-1">
+                <label for="qtd" class="lbl-qtd">Quantidade {{ i + 1 }}:</label>
+                <input
+                  type="text"
+                  [(ngModel)]="ingredientsModel[i].qtd"
+                  class="form-control form-control-sm"
+                  name="qtd{{i}}"
+                />
+              </div>
+            </div>
+            <div class="col-2">
+              <button
+                (click)="removeIngredient(i)"
+                type="button"
+                class="btn btn-danger btn-sm"
+              >
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class="tab-pane fade"
+          id="preparation"
+          role="tabpanel"
+          aria-labelledby="preparation-tab"
+        >
+          <div class="row mt-2 px-2">
+            <div class="col-12">
+              <div class="form-group">
+                <label for="preparation">Modo de preparo:</label>
+                <textarea
+                  name="text"
+                  [(ngModel)]="preparation.text"
+                  class="form-control"
+                  id="preparation"
+                  rows="5"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row px-2">
+        <div class="col-12">
+          <button
+            type="button"
+            (click)="onSubmit()"
+            class="btn btn-outline-primary"
+          >
+            Criar receita
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
