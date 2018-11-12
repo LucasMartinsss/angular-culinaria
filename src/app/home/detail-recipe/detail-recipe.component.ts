@@ -3,6 +3,7 @@ import { RecipeService } from "src/app/services/recipe.service";
 import { Recipe } from "src/app/models/recipe.model";
 import { ActivatedRoute } from "@angular/router";
 import { Constants } from "src/app/utils/constants";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-detail-recipe",
@@ -12,7 +13,9 @@ import { Constants } from "src/app/utils/constants";
 export class DetailRecipeComponent implements OnInit {
   public recipe = new Recipe();
   public categories = Constants.categories;
+  private recipeSubs: Subscription;
   private subParams: any;
+
   constructor(
     private recipeService: RecipeService,
     private route: ActivatedRoute
@@ -25,10 +28,12 @@ export class DetailRecipeComponent implements OnInit {
   }
 
   getRecipe(id) {
-    console.log(id);
-    this.recipe = this.recipeService.getRecipeById(id);
+    this.recipeSubs = this.recipeService
+      .getRecipeById(id)
+      .subscribe(data => (this.recipe = data));
   }
   ngOnDestroy() {
     this.subParams.unsubscribe();
+    this.recipeSubs.unsubscribe();
   }
 }

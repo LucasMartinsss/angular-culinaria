@@ -4,6 +4,7 @@ import { trigger, transition, style, animate } from "@angular/animations";
 import { Recipe } from "src/app/models/recipe.model";
 import { Ingredient } from "src/app/models/ingredient.model";
 import { Preparation } from "src/app/models/preparation.model";
+import { RecipeService } from "src/app/services/recipe.service";
 
 @Component({
   selector: "app-new-recipe",
@@ -18,22 +19,32 @@ import { Preparation } from "src/app/models/preparation.model";
 })
 export class NewRecipeComponent implements OnInit {
   public recipe = new Recipe();
-  public ingredientsModel = [{ name: "", qtd: "" }];
+  public ingredients = new Array<Ingredient>({
+    id: 0,
+    name: "",
+    qtd: "",
+    recipe_id: 0
+  });
   public preparation = new Preparation();
 
-  constructor() {
+  constructor(private recipeService: RecipeService) {
     this.recipe.category = "0";
   }
 
   ngOnInit() {}
 
   public addIngredient() {
-    this.ingredientsModel.push({ name: "", qtd: "" });
+    this.ingredients.push({ id: 0, name: "", qtd: "", recipe_id: 0 });
   }
 
   public removeIngredient(index: number) {
-    this.ingredientsModel.splice(index, 1);
+    this.ingredients.splice(index, 1);
   }
 
-  public onSubmit() {}
+  public onSubmit() {
+    this.recipeService.newRecipe(this.recipe).subscribe(res => {
+      this.recipeService.newIngredients(res.id, this.ingredients);
+      this.recipeService.newPreparation(res.id, this.preparation);
+    });
+  }
 }
