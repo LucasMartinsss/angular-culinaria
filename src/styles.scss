@@ -31,13 +31,15 @@ button {
       border-color: #197278;
       color: white;
     }
-  }
-}
-.new {
-  .nav-link {
-    color: #197278;
-    &:hover {
-      color: #114f54;
+    &:not(:disabled):not(.disabled):active {
+      background-color: #114f54;
+      border-color: #114f54;
+      &:focus {
+        box-shadow: 0 0 0 0.2rem rgba(#114f54, 0.5);
+      }
+    }
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba(#114f54, 0.5);
     }
   }
 }

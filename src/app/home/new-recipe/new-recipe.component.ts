@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { trigger, transition, style, animate } from "@angular/animations";
+import { Router } from "@angular/router";
 
 import { Recipe } from "src/app/models/recipe.model";
 import { Ingredient } from "src/app/models/ingredient.model";
@@ -27,7 +28,7 @@ export class NewRecipeComponent implements OnInit {
   });
   public preparation = new Preparation();
 
-  constructor(private recipeService: RecipeService) {
+  constructor(private recipeService: RecipeService, private router: Router) {
     this.recipe.category = "0";
   }
 
@@ -43,8 +44,16 @@ export class NewRecipeComponent implements OnInit {
 
   public onSubmit() {
     this.recipeService.newRecipe(this.recipe).subscribe(res => {
-      this.recipeService.newIngredients(res.id, this.ingredients);
-      this.recipeService.newPreparation(res.id, this.preparation);
+      this.recipeService
+        .newIngredients(res.id, this.ingredients)
+        .subscribe(dataIng => {});
+      this.recipeService
+        .newPreparation(res.id, this.preparation)
+        .subscribe(dataPrep => {
+          setTimeout(() => {
+            this.router.navigate(["/home/detail", res.id]);
+          });
+        });
     });
   }
 }
