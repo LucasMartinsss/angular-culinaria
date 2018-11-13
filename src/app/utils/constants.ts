@@ -6,4 +6,6 @@ export class Constants {
     "Bebida",
     "Outros"
   ];
+  public static messageSuccess = "Receita cadastrada com sucesso!";
+  public static messageDanger = "Houve um problema no cadastro!";
 }

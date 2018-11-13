@@ -1,4 +1,13 @@
 <div class="row new">
+  <div
+    class="alert"
+    [ngClass]="{ 'alert-success': isSuccess, 'alert-danger': !isSuccess }"
+    role="alert"
+    [@messageAnimation]=""
+    *ngIf="message !== ''"
+  >
+    {{ message }}
+  </div>
   <div class="col-12 text-center mb-3"><h1>Criar Receita</h1></div>
   <div class="col-12">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
