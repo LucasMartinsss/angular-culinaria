@@ -3,7 +3,8 @@
     <h1>{{ recipe.name }}</h1>
   </div>
   <div class="col-12 mb-1">
-    <span class="font-weight-bold">Porções: </span>{{ recipe.portions }} pessoas
+    <span class="font-weight-bold">Porções: </span
+    >{{ recipe.portions ? recipe.portions + " pessoas" : "" }}
   </div>
   <div class="col-12 mb-1">
     <span class="font-weight-bold">Calorias: </span>{{ recipe.calories }}
@@ -20,6 +21,6 @@
   </div>
   <div class="col-12">
     <h4>Modo de Preparo:</h4>
-    <p>{{ recipe.preparation.text }}</p>
+    <p>{{ recipe.preparation?.text }}</p>
   </div>
 </div>

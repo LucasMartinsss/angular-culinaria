@@ -59,6 +59,7 @@
                   placeholder="Nome da receita"
                   name="name"
                   [(ngModel)]="recipe.name"
+                  required="true"
                 />
               </div>
             </div>
@@ -72,6 +73,7 @@
                   placeholder="Porções"
                   name="portions"
                   [(ngModel)]="recipe.portions"
+                  required
                 />
               </div>
             </div>
@@ -136,14 +138,14 @@
           <div
             class="row mb-2 px-2"
             [@filterAnimation]="i"
-            *ngFor="let item of ingredientsModel; let i = index"
+            *ngFor="let item of ingredients; let i = index"
           >
             <div class="col-6">
               <div class="form-group mb-1">
                 <label for="name-ingredient">Ingrediente {{ i + 1 }}:</label>
                 <input
                   type="text"
-                  [(ngModel)]="ingredientsModel[i].name"
+                  [(ngModel)]="ingredients[i].name"
                   class="form-control form-control-sm"
                   name="name{{i}}"
                 />
@@ -154,7 +156,7 @@
                 <label for="qtd" class="lbl-qtd">Quantidade {{ i + 1 }}:</label>
                 <input
                   type="text"
-                  [(ngModel)]="ingredientsModel[i].qtd"
+                  [(ngModel)]="ingredients[i].qtd"
                   class="form-control form-control-sm"
                   name="qtd{{i}}"
                 />
